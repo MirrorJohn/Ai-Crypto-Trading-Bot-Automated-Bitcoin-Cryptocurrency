@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<RootNamespace>Hallupa.TraderTools.Brokers.Binance</RootNamespace>
+		<AssemblyName>Hallupa.TraderTools.Brokers.Binance</AssemblyName>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Binance.Net" Version="6.13.5" />
+	  <PackageReference Include="log4net" Version="2.0.12" />
+	  <PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+
+</Project>
