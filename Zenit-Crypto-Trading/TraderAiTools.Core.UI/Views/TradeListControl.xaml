@@ -1,0 +1,209 @@
+﻿<UserControl x:Class="TraderTools.Core.UI.Views.TradeListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:TraderTools.Core.UI.Views"
+             xmlns:converters1="clr-namespace:TraderTools.Core.UI.Converters"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ui="clr-namespace:Hallupa.Library.UI;assembly=Hallupa.Library.UI"
+             xmlns:converters="clr-namespace:Hallupa.Library.UI.Converters;assembly=Hallupa.Library.UI"
+             xmlns:tokenEditor="clr-namespace:Hallupa.Library.UI.TokenEditor;assembly=Hallupa.Library.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <ui:BindingProxy x:Key="Proxy" Data="{Binding}" />
+            <converters:BoolToVisibilityConverter x:Key="BoolToVis"/>
+            <converters1:LimitDecimalPlaces x:Key="DP1" DecimalPlaces="1"/>
+            <converters1:LimitDecimalPlaces x:Key="DP0" DecimalPlaces="0"/>
+            <converters:FlagsToVisibilityConverter x:Key="FlagsToVis"/>
+            <converters1:CloseStatusToColourConverter x:Key="StatusToColour"/>
+            <converters1:ValueToColourConverter x:Key="ValueToColour"/>
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="DataGridRow">
+                <EventSetter Event="MouseDoubleClick" Handler="DataGridRowDoubleClick"/>
+            </Style>
+        </Grid.Resources>
+
+        <DataGrid ItemsSource="{Binding Path=Trades, IsAsync=True}" EnableRowVirtualization="true" AutoGenerateColumns="False" GridLinesVisibility="Horizontal"
+                  SelectedItem="{Binding SelectedTrade}" CanUserDeleteRows="False" SelectionMode="{Binding TradeSelectionMode}"
+                  CanUserAddRows="False" x:Name="MainDataGrid" ClipboardCopyMode="IncludeHeader" PreviewMouseWheel="MainDataGrid_OnPreviewMouseWheel">
+            <DataGrid.Resources>
+                <ui:BindingProxy x:Key="Proxy" Data="{Binding}" />
+            </DataGrid.Resources>
+            <DataGrid.ContextMenu>
+                <ContextMenu x:Name="MainContextMenu">
+                    <MenuItem Header="Show open trades only" IsCheckable="True" IsChecked="{Binding Data.ShowOpenTradesOnly, Source={StaticResource Proxy}}"/>
+                    <MenuItem Header="Show orders only" IsCheckable="True" IsChecked="{Binding Data.ShowOrdersOnly, Source={StaticResource Proxy}}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id, Mode=OneWay}" IsReadOnly="True" Width="70" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status, Mode=OneWay}" IsReadOnly="True" Width="75" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Status}, Mode=OneWay}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Background" Value="{Binding ., Converter={StaticResource StatusToColour}}" />
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Market" Binding="{Binding Market, Mode=OneWay}" IsReadOnly="True" Width="80" />
+                <DataGridTextColumn Header="Order date" Binding="{Binding OrderDateTimeLocal, StringFormat={}{0:dd-MM-yy HH:mm}, Mode=OneWay}" IsReadOnly="True" Width="100" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.OrderDate}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Order price" Binding="{Binding OrderPrice, StringFormat={}{0:0.0000}, Mode=OneWay}" IsReadOnly="True" Width="75" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.OrderPrice}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Entry price" Binding="{Binding EntryPrice, StringFormat={}{0:0.0000}, Mode=OneWay}" IsReadOnly="True" Width="68"/>
+                <DataGridTextColumn Header="Close price" Binding="{Binding ClosePrice, StringFormat={}{0:0.0000}, Mode=OneWay}" IsReadOnly="True" Width="68" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.ClosePrice}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="L/S" Binding="{Binding TradeDirection}" FontWeight="Bold" IsReadOnly="True" Width="40"/>
+                <DataGridTextColumn Header="Broker" Binding="{Binding Broker, Mode=OneWay}" FontWeight="Bold" IsReadOnly="True" Width="75" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Broker}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="£/pip" Binding="{Binding PricePerPip, StringFormat={}{0:0.00}}" IsReadOnly="True" Width="50" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.PoundsPerPip}, Mode=OneWay}"/>
+                <DataGridComboBoxColumn Header="T" SelectedItemBinding="{Binding Timeframe, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Data.TimeFrameItems, Source={StaticResource Proxy}, UpdateSourceTrigger=PropertyChanged}" Width="55" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Timeframe}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding EntryQuantity, StringFormat={}{0:0.00000}, Mode=OneWay}" IsReadOnly="True" Width="75" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Quantity}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Entry value" Binding="{Binding EntryValue, StringFormat={}{0:0.0000}, Mode=OneWay}" IsReadOnly="True" Width="68" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.EntryValue}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Commission value" Binding="{Binding CommissionValue, StringFormat={}{0:0.0000}, Mode=OneWay}" IsReadOnly="True" Width="68" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.EntryValue}, Mode=OneWay}"/>
+
+                <DataGridTemplateColumn Header="Initial &amp; Current Stop" Width="140" ClipboardContentBinding="{Binding InitialStopInPips, Mode=OneWay, Converter={StaticResource DP0}}"
+                                        Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Stop}, Mode=OneWay}">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Background" Value="#11FF0000" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Margin="2" Text="{Binding InitialStop, StringFormat={}{0:0.000}, Mode=OneWay}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="{Binding InitialStopInPips, StringFormat={}{0:0.0 pips}, Mode=OneWay}"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="1" Margin="2" Text="{Binding StopPrice, StringFormat={}{0:0.000}, Mode=OneWay}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Initial &amp; Current Limit" Width="140"
+                                        Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Limit}, Mode=OneWay}">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Background" Value="#1100FF00" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Margin="2" Text="{Binding InitialLimit, StringFormat={}{0:0.000}, Mode=OneWay}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="{Binding InitialLimitInPips, StringFormat={}{0:0.0 pips}, Mode=OneWay}"/>
+
+                                <TextBlock Grid.Row="0" Grid.Column="1" Margin="2" Text="{Binding LimitPrice, StringFormat={}{0:0.000}, Mode=OneWay}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Risking" Binding="{Binding RiskAmount, StringFormat={}£{0:0.00}, Mode=OneWay}" IsReadOnly="True" Width="60" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Risk}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Rollover" Binding="{Binding Rollover, StringFormat={}£{0:0.00}, Mode=OneWay}" IsReadOnly="True" Width="60" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Rollover}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Risk %" Binding="{Binding RiskPercentOfBalance, StringFormat={}{0:0.00}%, Mode=OneWay}" IsReadOnly="True" Width="55" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Risk}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Profit" Binding="{Binding Profit, StringFormat={}£{0:0.00}, Mode=OneWay}" IsReadOnly="True" Width="60" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Profit}, Mode=OneWay}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Background" Value="{Binding Profit, Converter={StaticResource ValueToColour}}" />
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Result R" ClipboardContentBinding="{Binding RMultiple, Mode=OneWay, Converter={StaticResource DP1}}" Binding="{Binding RMultiple, StringFormat={}{0:0.00}, Mode=OneWay}" IsReadOnly="True" Width="60" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.ResultR}, Mode=OneWay}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Background" Value="{Binding RMultiple, Converter={StaticResource ValueToColour}}" />
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+
+                <DataGridCheckBoxColumn Header="Analysed" Width="60" Binding="{Binding IsAnalysed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="IsEditing" Value="True" />
+                                </Trigger>
+                            </Style.Triggers>
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+
+                <DataGridTemplateColumn Header="Strategies" Width="260" IsReadOnly="False" CanUserSort="True" SortMemberPath="Strategies"
+                                        Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Strategies}, Mode=OneWay}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <tokenEditor:TokenContainerControl SelectedItemsCSV="{Binding Path=Strategies, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Comments" Width="350"
+                                        Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Comments}, Mode=OneWay}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Order date" Binding="{Binding OrderDateTimeLocal, StringFormat={}{0:dd-MM-yy HH:mm}, Mode=OneWay}" IsReadOnly="True" Width="100" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Dates}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Entry date" Binding="{Binding EntryDateTimeLocal, StringFormat={}{0:dd-MM-yy HH:mm}, Mode=OneWay}" IsReadOnly="True" Width="100" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Dates}, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Close date" Binding="{Binding CloseDateTimeLocal, StringFormat={}{0:dd-MM-yy HH:mm}, Mode=OneWay}" IsReadOnly="True" Width="100" Visibility="{Binding Data.TradeListDisplayOptions, Source={StaticResource Proxy}, Converter={StaticResource FlagsToVis}, ConverterParameter={x:Static views:TradeListDisplayOptionsFlag.Dates}, Mode=OneWay}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
