@@ -1,0 +1,269 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderAiTools.Core.UI\\TraderAiTools.Core.UI.csproj": {}
+  },
+  "projects": {
+    "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library.UI\\Library.UI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library.UI\\Library.UI.csproj",
+        "projectName": "Hallupa.Library.UI",
+        "projectPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library.UI\\Library.UI.csproj",
+        "packagesPath": "C:\\Users\\LW\\.nuget\\packages\\",
+        "outputPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library.UI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\visualstudio\\sdk\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\LW\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library\\Library.csproj": {
+                "projectPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library\\Library.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "AvalonEdit": {
+              "target": "Package",
+              "version": "[6.1.2.30, )"
+            },
+            "Microsoft.Xaml.Behaviors.Wpf": {
+              "target": "Package",
+              "version": "[1.1.31, )"
+            },
+            "System.ComponentModel.Composition": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.12, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library\\Library.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library\\Library.csproj",
+        "projectName": "Hallupa.Library",
+        "projectPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library\\Library.csproj",
+        "packagesPath": "C:\\Users\\LW\\.nuget\\packages\\",
+        "outputPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\visualstudio\\sdk\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\LW\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "System.ComponentModel.Composition": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.12, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderAiTools.Core.UI\\TraderAiTools.Core.UI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderAiTools.Core.UI\\TraderAiTools.Core.UI.csproj",
+        "projectName": "Hallupa.TraderTools.Core.UI",
+        "projectPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderAiTools.Core.UI\\TraderAiTools.Core.UI.csproj",
+        "packagesPath": "C:\\Users\\LW\\.nuget\\packages\\",
+        "outputPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderAiTools.Core.UI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\visualstudio\\sdk\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\LW\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library.UI\\Library.UI.csproj": {
+                "projectPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\Library.UI\\Library.UI.csproj"
+              },
+              "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderTools.Basics\\TraderTools.Basics.csproj": {
+                "projectPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderTools.Basics\\TraderTools.Basics.csproj"
+              },
+              "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderTools.Indicators\\TraderTools.Indicators.csproj": {
+                "projectPath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderTools.Indicators\\TraderTools.Indicators.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "SciChart": {
+              "target": "Package",
+              "version": "[6.5.1.26063, )"
+            },
+            "System.ComponentModel.Composition": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Reactive": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.12, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
