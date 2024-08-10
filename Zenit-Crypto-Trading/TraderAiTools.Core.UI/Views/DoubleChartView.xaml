@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="TraderTools.Core.UI.Views.DoubleChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:TraderTools.Core.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding SmallerChartWidth}"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <views:ChartView Grid.Column="0" Grid.Row="0" DataContext="{Binding LeftChartViewModel}" />
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Grid.RowSpan="2" VerticalAlignment="Stretch" Width="7" />
+        <views:ChartView Grid.Column="2" Grid.Row="0" DataContext="{Binding RightChartViewModel}" />
+    </Grid>
+</UserControl>
