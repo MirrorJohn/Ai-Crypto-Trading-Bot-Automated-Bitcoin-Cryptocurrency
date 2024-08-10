@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "dgSpecHash": "wOG2UEeM0EpHa5R6/RZ7C+EU+9YSpURHH79y0N+NL6JAV+W2HBTDIGcD5reQjSlCtRUn+H32K/5GA5bWncvdPQ==",
+  "success": false,
+  "projectFilePath": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderAiTools.Core.UI\\TraderAiTools.Core.UI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\LW\\.nuget\\packages\\avalonedit\\6.1.2.30\\avalonedit.6.1.2.30.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\log4net\\2.0.12\\log4net.2.0.12.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.31\\microsoft.xaml.behaviors.wpf.1.1.31.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\scichart\\6.5.1.26063\\scichart.6.5.1.26063.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\system.componentmodel.composition\\5.0.0\\system.componentmodel.composition.5.0.0.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\system.configuration.configurationmanager\\4.5.0\\system.configuration.configurationmanager.4.5.0.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\system.reactive\\5.0.0\\system.reactive.5.0.0.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\system.security.accesscontrol\\4.5.0\\system.security.accesscontrol.4.5.0.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.5.0\\system.security.cryptography.protecteddata.4.5.0.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\system.security.permissions\\4.5.0\\system.security.permissions.4.5.0.nupkg.sha512",
+    "C:\\Users\\LW\\.nuget\\packages\\system.security.principal.windows\\4.5.0\\system.security.principal.windows.4.5.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Unable to find project 'D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderTools.Basics\\TraderTools.Basics.csproj'. Check that the project reference is valid and that the project file exists.",
+      "libraryId": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderTools.Basics\\TraderTools.Basics.csproj",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Unable to find project 'D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderTools.Indicators\\TraderTools.Indicators.csproj'. Check that the project reference is valid and that the project file exists.",
+      "libraryId": "D:\\GithubNew\\4\\AiCryptoTrad\\TradingBot\\Zenit-Crypto-Trading\\TraderTools.Indicators\\TraderTools.Indicators.csproj",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
+}
